@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Birthday Surprise For Anjali ✨</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+font-family:Poppins,sans-serif;
+background:linear-gradient(135deg,#0f172a,#1e293b);
+color:#fff;overflow:hidden;
+}
+.page{display:none;min-height:100vh;align-items:center;justify-content:center;padding:24px}
+.active{display:flex}
+.card{
+max-width:800px;width:100%;
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(14px);
+border-radius:28px;
+padding:40px;
+text-align:center;
+box-shadow:0 10px 40px rgba(0,0,0,.35);
+}
+h1{font-family:"Playfair Display",serif;margin-bottom:18px}
+p{line-height:1.9}
+button{
+margin-top:24px;border:none;padding:14px 26px;border-radius:999px;
+background:#f9a8d4;font-weight:600;cursor:pointer
+}
+video{width:100%;border-radius:18px;margin-top:18px}
+.stars{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-top:22px}
+.star{font-size:40px;cursor:pointer}
+#wish{margin-top:20px;color:#f9a8d4;min-height:32px}
+.small{opacity:.8;margin-top:14px}
+.float{
+position:fixed;width:4px;height:4px;border-radius:50%;background:#fff;opacity:.4;
+animation:rise 12s linear infinite;
+}
+@keyframes rise{from{transform:translateY(110vh)}to{transform:translateY(-10vh)}}
+</style>
+</head>
+<body>
+
+<audio id="bg" loop>
+<source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<div class="float" style="left:10%"></div>
+<div class="float" style="left:30%;animation-delay:2s"></div>
+<div class="float" style="left:50%;animation-delay:4s"></div>
+<div class="float" style="left:70%;animation-delay:1s"></div>
+<div class="float" style="left:90%;animation-delay:3s"></div>
+
+<section id="home" class="page active">
+<div class="card">
+<h1>🎁 Hey Anjali...</h1>
+<p>Aaj ka din already special hai, lekin maine socha ki ismein thoda sa aur magic add kiya jaaye ✨<br><br>Ready for a little surprise?</p>
+<button onclick="start()">✨ Get Started</button>
+</div>
+</section>
+
+<section id="note" class="page">
+<div class="card">
+<h1>💌 A Little Note</h1>
+<p>Aaj tumhara birthday hai, aur shayad main ye sab ek simple Happy Birthday message bhej kar bhi khatam kar sakta tha.<br><br>
+Lekin mujhe laga ki kuch cheezein sirf words mein nahi kahi ja sakti.<br><br>
+Isliye maine tumhare liye kuch chhota sa surprise prepare kiya hai. Bas ek request hai... iss surprise ko dekhte waqt ek baar smile zaroor karna 😊</p>
+<button onclick="show('videoPage')">🎬 Open Surprise</button>
+</div>
+</section>
+
+<section id="videoPage" class="page">
+<div class="card">
+<h1>❤️ One More Thing</h1>
+<p>Some things are better said than written...</p>
+<video id="vid" controls>
+<source src="birthday-video.mp4" type="video/mp4">
+</video>
+<button onclick="show('starsPage')">⭐ Continue</button>
+</div>
+</section>
+
+<section id="starsPage" class="page">
+<div class="card">
+<h1>✨ Hidden Wishes For Anjali ✨</h1>
+<p>There are a few wishes hidden in the stars 🌙</p>
+<div class="stars">
+<div class="star" onclick="wish('I hope you keep smiling, Anjali 😊')">⭐</div>
+<div class="star" onclick="wish('You deserve all the happiness in the world 🌷')">⭐</div>
+<div class="star" onclick="wish('May this year bring beautiful memories ✨')">⭐</div>
+<div class="star" onclick="wish('Never forget how special you are ❤️')">⭐</div>
+</div>
+<div id="wish"></div>
+<button onclick="show('finalPage')">💖 Final Surprise</button>
+</div>
+</section>
+
+<section id="finalPage" class="page">
+<div class="card">
+<h1>🎂 Happy Birthday, Anjali 🎂</h1>
+<p>
+Out of all the birthdays you'll celebrate...<br><br>
+I hope you'll remember that someone spent time, effort and heart trying to make this day a little more special for you ❤️<br><br>
+You are appreciated.<br>
+You are important.<br>
+And today is all about you 🌷
+</p>
+<p class="small">Made with ❤️ especially for Anjali.</p>
+<button onclick="confetti();show('home')">🏠 Experience Again</button>
+</div>
+</section>
+
+<script>
+const bg=document.getElementById('bg');
+const vid=document.getElementById('vid');
+
+function start(){
+bg.volume=0.2;
+bg.play().catch(()=>{});
+show('note');
+}
+function show(id){
+document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+document.getElementById(id).classList.add('active');
+}
+function wish(t){document.getElementById('wish').innerText=t;}
+vid.addEventListener('play',()=>bg.pause());
+vid.addEventListener('ended',()=>bg.play());
+
+function confetti(){
+for(let i=0;i<80;i++){
+let d=document.createElement('div');
+d.innerHTML='🎉';
+d.style.position='fixed';
+d.style.left=Math.random()*100+'vw';
+d.style.top='-20px';
+d.style.fontSize='24px';
+d.style.pointerEvents='none';
+document.body.appendChild(d); setTimeout(()=>d.remove(),3000);
+}
+}
+</script>
+</body>
+</html>
